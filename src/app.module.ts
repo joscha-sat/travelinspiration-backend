@@ -5,8 +5,9 @@ import { TravelpostModule } from './models/travelpost/travelpost.module';
 import { Photo } from './models/photo/photo.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { PhotoModule } from './models/photo/photo.module';
-import { UserService } from './models/user/user.service';
 import { AuthModule } from './models/auth/auth.module';
+import { UsersModule } from './models/users/users.module';
+import { User } from './models/users/user.entity';
 
 @Module({
   imports: [
@@ -17,18 +18,18 @@ import { AuthModule } from './models/auth/auth.module';
       username: '21_DB_Grp_2',
       password: `pS!'NWkk5hrb84ijZr3EPJ2+qqd/aV*4`,
       database: '21_DB_Gruppe2_Projektmanagement',
-      entities: [Travelpost, Photo],
+      entities: [Travelpost, Photo, User],
       synchronize: true,
     }),
     MulterModule.register({
       dest: './images',
     }),
-
     TravelpostModule,
     PhotoModule,
     AuthModule,
+    UsersModule,
   ],
   controllers: [],
-  providers: [UserService],
+  providers: [],
 })
 export class AppModule {}
