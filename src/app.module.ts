@@ -5,6 +5,8 @@ import { TravelpostModule } from './models/travelpost/travelpost.module';
 import { Photo } from './models/photo/photo.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { PhotoModule } from './models/photo/photo.module';
+import { UserService } from './models/user/user.service';
+import { AuthModule } from './models/auth/auth.module';
 
 @Module({
   imports: [
@@ -24,8 +26,9 @@ import { PhotoModule } from './models/photo/photo.module';
 
     TravelpostModule,
     PhotoModule,
+    AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [UserService],
 })
 export class AppModule {}
