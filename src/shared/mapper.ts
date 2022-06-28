@@ -1,6 +1,6 @@
 import { User } from '../models/users/user.entity';
 import { UserDto } from '../models/users/dto/user.dto';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
 export const toUserDto = (data: User): UserDto => {
   const { id, username, email } = data;

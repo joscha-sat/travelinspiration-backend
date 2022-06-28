@@ -3,10 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Travelpost } from './travelpost.entity';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { Photo } from '../photo/photo.entity';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class TravelpostService {
   constructor(
+    private usersService: UsersService,
     @InjectRepository(Travelpost)
     private travelPostRepo: Repository<Travelpost>,
     @InjectRepository(Photo)
@@ -35,6 +37,11 @@ export class TravelpostService {
   // GET ALL TRAVEL POSTS OF ONE STATE  ------------------------------------------------------//
   getTravelPostByState(state: string): Promise<Travelpost[]> {
     return this.travelPostRepo.find({ where: { state: state } });
+  }
+
+  // GET ALL TRAVEL POSTS OF ONE USER  ------------------------------------------------------//
+  getTravelPostByUserId(userId: string): Promise<Travelpost[]> {
+    return this.travelPostRepo.find({ where: { userId: userId } });
   }
 
   // GET ONE TRAVEL POSTS BY ID  ------------------------------------------------------//

@@ -33,6 +33,7 @@ export class TravelpostController {
     }),
   )
   async addPost(@Body() post: Travelpost, @UploadedFiles() files) {
+    console.log(post);
     return await this.travelPostService.addTravelPost(post, files);
   }
 
@@ -49,6 +50,13 @@ export class TravelpostController {
   @Get('/state/:state')
   getTravelPostByState(@Param('state') state: string) {
     return this.travelPostService.getTravelPostByState(state);
+  }
+
+  @Get('/user/:userId')
+  getTravelPostByUserId(
+    @Param('userId') userId: string,
+  ): Promise<Travelpost[]> {
+    return this.travelPostService.getTravelPostByUserId(userId);
   }
 
   @Patch(':id')

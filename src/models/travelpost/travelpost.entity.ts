@@ -8,8 +8,8 @@ export class Travelpost {
   id: string;
 
   // USER ID OF CREATOR
-  // @Column({ nullable: false })
-  // userId: string;
+  @Column({ nullable: false })
+  userId: string;
 
   // TITEL
   @Column({ nullable: false })

@@ -28,10 +28,7 @@ export class UsersService {
       email,
     });
 
-    console.log(user);
     await this.userRepo.save(user);
-
-    console.log('hjehe');
 
     return user;
   }
