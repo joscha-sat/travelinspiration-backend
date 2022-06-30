@@ -62,6 +62,11 @@ export class TravelpostService {
     return this.travelPostRepo.clear();
   }
 
+  // DELETE ALL TRAVEL POSTS  ------------------------------------------------------//
+  deleteOneTravelPosts(id: string): Promise<DeleteResult> {
+    return this.travelPostRepo.delete(id);
+  }
+
   // DELETE ONE TRAVEL POSTS BY ID  ------------------------------------------------------//
   deleteTravelPostsById(id: string): Promise<DeleteResult> {
     return this.travelPostRepo.delete(id);

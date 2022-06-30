@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Photo } from '../photo/photo.entity';
+import { JoinTable } from 'typeorm/browser';
 
 @Entity()
 export class Travelpost {
@@ -48,6 +49,8 @@ export class Travelpost {
   other: string;
 
   //  IMAGES
-  @OneToMany(() => Photo, (photo) => photo.travelpost, { cascade: true })
+  @OneToMany(() => Photo, (photo) => photo.travelpost, {
+    cascade: true,
+  })
   photos: Photo[];
 }

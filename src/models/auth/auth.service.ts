@@ -16,18 +16,24 @@ export class AuthService {
   ) {}
 
   async register(userDto: CreateUserDto): Promise<RegistrationStatus> {
+    // default status successfully registered
+
     let status: RegistrationStatus = {
       success: true,
       message: 'user registered',
     };
+
     try {
       await this.usersService.create(userDto);
     } catch (err) {
+      // set status to error if registration failed
       status = {
         success: false,
         message: err,
       };
     }
+
+    // return the status, either the registration was successful or failed
     return status;
   }
 

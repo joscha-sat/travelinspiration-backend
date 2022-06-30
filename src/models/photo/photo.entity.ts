@@ -9,6 +9,9 @@ export class Photo {
   @Column()
   url: string;
 
-  @ManyToOne('Travelpost', (travelpost: Travelpost) => travelpost.photos)
+  @ManyToOne('Travelpost', (travelpost: Travelpost) => travelpost.photos, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+  })
   travelpost: Travelpost;
 }
