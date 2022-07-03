@@ -16,10 +16,11 @@ import { ConfigModule } from '@nestjs/config';
       property: 'user',
       session: false,
     }),
+
     JwtModule.register({
-      secret: process.env.SECRET_KEY,
+      secret: '1E98A875B8BA2CC5',
       signOptions: {
-        expiresIn: process.env.EXPIRESIN,
+        expiresIn: '1h',
       },
     }),
     ConfigModule.forRoot(),

@@ -33,7 +33,6 @@ export class TravelpostController {
     }),
   )
   async addPost(@Body() post: Travelpost, @UploadedFiles() files) {
-    console.log(post);
     return await this.travelPostService.addTravelPost(post, files);
   }
 

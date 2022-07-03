@@ -8,6 +8,7 @@ import { PhotoModule } from './models/photo/photo.module';
 import { AuthModule } from './models/auth/auth.module';
 import { UsersModule } from './models/users/users.module';
 import { User } from './models/users/user.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { User } from './models/users/user.entity';
     MulterModule.register({
       dest: './images',
     }),
+    ConfigModule.forRoot(),
     TravelpostModule,
     PhotoModule,
     AuthModule,

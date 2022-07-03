@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Photo } from '../photo/photo.entity';
-import { JoinTable } from 'typeorm/browser';
 
 @Entity()
 export class Travelpost {
