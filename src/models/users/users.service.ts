@@ -94,4 +94,13 @@ export class UsersService {
 
     return this.userRepo.save(user);
   }
+
+  async getFavourites(id: string) {
+    const user = await this.userRepo.findOne({
+      relations: ['favouriteList'],
+      where: { id: id },
+    });
+
+    return user.favouriteList;
+  }
 }

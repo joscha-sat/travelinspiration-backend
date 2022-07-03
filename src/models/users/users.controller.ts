@@ -1,4 +1,4 @@
-import { Controller, Param, Put } from '@nestjs/common';
+import { Controller, Get, Param, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -11,5 +11,10 @@ export class UsersController {
     @Param('postId') postId: string,
   ) {
     return this.usersService.addTravelpostToFavouritesList(userId, postId);
+  }
+
+  @Get('favourites/:userId')
+  getFavourites(@Param('userId') userId: string) {
+    return this.usersService.getFavourites(userId);
   }
 }
