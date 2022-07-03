@@ -103,4 +103,19 @@ export class UsersService {
 
     return user.favouriteList;
   }
+
+  async deleteFavouriteById(userId: string, postId: string) {
+    const user = await this.userRepo.findOne({
+      relations: ['favouriteList'],
+      where: { id: userId },
+    });
+
+    const index = user.favouriteList.findIndex((object) => {
+      return object.id.toString() === postId;
+    });
+
+    user.favouriteList.splice(index, 1);
+
+    await this.userRepo.save(user);
+  }
 }
