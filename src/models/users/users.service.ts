@@ -116,6 +116,6 @@ export class UsersService {
 
     user.favouriteList.splice(index, 1);
 
-    await this.userRepo.save(user);
+    return await this.userRepo.save(user);
   }
 }

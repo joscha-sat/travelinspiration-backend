@@ -31,7 +31,7 @@ export class User {
   })
   email: string;
 
-  @ManyToMany(() => Travelpost, { cascade: true })
+  @ManyToMany(() => Travelpost, { cascade: true, onUpdate: 'CASCADE' })
   @JoinTable()
   favouriteList: Travelpost[];
 

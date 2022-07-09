@@ -18,13 +18,12 @@ export class UsersController {
     @Body('userId') userId: string,
     @Body('postId') postId: string,
   ) {
-    console.log(userId, postId);
-    this.usersService.deleteFavouriteById(userId, postId).then();
-    return null;
+    return this.usersService.deleteFavouriteById(userId, postId);
   }
 
   @Get('favourites/:userId')
   getFavourites(@Param('userId') userId: string) {
+    console.log(userId);
     return this.usersService.getFavourites(userId);
   }
 }
