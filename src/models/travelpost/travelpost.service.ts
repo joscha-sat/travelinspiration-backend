@@ -30,11 +30,6 @@ export class TravelpostService {
     return await this.travelPostRepo.save(travelpost);
   }
 
-  // GET ALL TRAVEL POSTS  ------------------------------------------------------//
-  getTravelPosts(): Promise<Travelpost[]> {
-    return this.travelPostRepo.find();
-  }
-
   // GET ALL TRAVEL POSTS OF ONE STATE  ------------------------------------------------------//
   getTravelPostByState(state: string): Promise<Travelpost[]> {
     return this.travelPostRepo.find({ where: { state: state } });
@@ -58,18 +53,8 @@ export class TravelpostService {
     return this.travelPostRepo.update(id, updateTravelPost);
   }
 
-  // DELETE ALL TRAVEL POSTS  ------------------------------------------------------//
-  deleteAllTravelPosts(): Promise<void> {
-    return this.travelPostRepo.clear();
-  }
-
-  // DELETE ALL TRAVEL POSTS  ------------------------------------------------------//
+  // DELETE TRAVEL POST BY ID  ------------------------------------------------------//
   deleteOneTravelPosts(id: string): Promise<DeleteResult> {
-    return this.travelPostRepo.delete(id);
-  }
-
-  // DELETE ONE TRAVEL POSTS BY ID  ------------------------------------------------------//
-  deleteTravelPostsById(id: string): Promise<DeleteResult> {
     return this.travelPostRepo.delete(id);
   }
 }

@@ -36,11 +36,6 @@ export class TravelpostController {
     return await this.travelPostService.addTravelPost(post, files);
   }
 
-  @Get()
-  getTravelPosts() {
-    return this.travelPostService.getTravelPosts();
-  }
-
   @Get(':id')
   getProductById(@Param('id') id: string) {
     return this.travelPostService.getTravelPostById(id);
@@ -64,11 +59,6 @@ export class TravelpostController {
     @Body() updateTravelPost: Travelpost,
   ): Promise<UpdateResult> {
     return this.travelPostService.updateTravelPostById(id, updateTravelPost);
-  }
-
-  @Delete()
-  deleteAllTravelPosts() {
-    return this.travelPostService.deleteAllTravelPosts();
   }
 
   @Delete(':id')
