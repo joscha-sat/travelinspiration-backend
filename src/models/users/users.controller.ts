@@ -23,7 +23,6 @@ export class UsersController {
 
   @Get('favourites/:userId')
   getFavourites(@Param('userId') userId: string) {
-    console.log(userId);
     return this.usersService.getFavourites(userId);
   }
 }
