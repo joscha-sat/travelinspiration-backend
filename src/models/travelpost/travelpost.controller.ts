@@ -62,9 +62,11 @@ export class TravelpostController {
   }
 
   @Delete(':id')
-  deleteOneTravelPosts(@Param() id: string) {
-    return this.travelPostService.deleteOneTravelPosts(id);
+  deleteOneTravelPost(@Param() id: string) {
+    return this.travelPostService.deleteOneTravelPost(id);
   }
+
+  // IMAGE
 
   @Get('/image/:imgpath')
   seeUploadedFile(@Param('imgpath') image, @Res() res) {

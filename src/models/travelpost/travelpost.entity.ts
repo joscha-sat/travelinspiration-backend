@@ -28,7 +28,7 @@ export class Travelpost {
   travelType: string;
 
   // BESCHREIBUNG
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'longtext' })
   description: string;
 
   // UNTERKUNFT
@@ -50,6 +50,7 @@ export class Travelpost {
   //  IMAGES
   @OneToMany(() => Photo, (photo) => photo.travelpost, {
     cascade: true,
+    onDelete: 'CASCADE',
   })
   photos: Photo[];
 }

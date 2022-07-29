@@ -45,7 +45,7 @@ export class TravelpostService {
     return this.travelPostRepo.findOne({ where: { id } });
   }
 
-  // PATCH TRAVEL POSTS  ------------------------------------------------------//
+  // UPDATE ONE TRAVEL POST  ------------------------------------------------------//
   updateTravelPostById(
     id: string,
     updateTravelPost: Travelpost,
@@ -54,7 +54,7 @@ export class TravelpostService {
   }
 
   // DELETE TRAVEL POST BY ID  ------------------------------------------------------//
-  deleteOneTravelPosts(id: string): Promise<DeleteResult> {
+  deleteOneTravelPost(id: string): Promise<DeleteResult> {
     return this.travelPostRepo.delete(id);
   }
 }
