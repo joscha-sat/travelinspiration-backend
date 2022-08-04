@@ -15,17 +15,9 @@ import { join } from 'path';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(
-        __dirname,
-        '..',
-        '..',
-        'travelnspiration-frontend',
-        'dist',
-        'travelnspiration',
-      ),
+      rootPath: join(__dirname, '..', 'front'),
       exclude: ['/api*'],
     }),
-
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '195.37.176.178',
