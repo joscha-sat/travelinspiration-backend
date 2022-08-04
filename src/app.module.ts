@@ -8,9 +8,24 @@ import { PhotoModule } from './models/photo/photo.module';
 import { AuthModule } from './models/auth/auth.module';
 import { UsersModule } from './models/users/users.module';
 import { User } from './models/users/user.entity';
+import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(
+        __dirname,
+        '..',
+        '..',
+        'travelnspiration-frontend',
+        'dist',
+        'travelnspiration',
+      ),
+      exclude: ['/api*'],
+    }),
+
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '195.37.176.178',
@@ -24,6 +39,7 @@ import { User } from './models/users/user.entity';
     MulterModule.register({
       dest: './images',
     }),
+    ConfigModule.forRoot(),
     TravelpostModule,
     PhotoModule,
     AuthModule,

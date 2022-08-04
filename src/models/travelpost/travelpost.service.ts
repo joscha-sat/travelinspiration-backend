@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Travelpost } from './travelpost.entity';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
@@ -8,6 +8,7 @@ import { UsersService } from '../users/users.service';
 @Injectable()
 export class TravelpostService {
   constructor(
+    @Inject(forwardRef(() => UsersService))
     private usersService: UsersService,
     @InjectRepository(Travelpost)
     private travelPostRepo: Repository<Travelpost>,
@@ -27,11 +28,6 @@ export class TravelpostService {
     travelpost.photos = myPhotos;
 
     return await this.travelPostRepo.save(travelpost);
-  }
-
-  // GET ALL TRAVEL POSTS  ------------------------------------------------------//
-  getTravelPosts(): Promise<Travelpost[]> {
-    return this.travelPostRepo.find();
   }
 
   // GET ALL TRAVEL POSTS OF ONE STATE  ------------------------------------------------------//
@@ -57,18 +53,8 @@ export class TravelpostService {
     return this.travelPostRepo.update(id, updateTravelPost);
   }
 
-  // DELETE ALL TRAVEL POSTS  ------------------------------------------------------//
-  deleteAllTravelPosts(): Promise<void> {
-    return this.travelPostRepo.clear();
-  }
-
-  // DELETE ALL TRAVEL POSTS  ------------------------------------------------------//
+  // DELETE TRAVEL POST BY ID  ------------------------------------------------------//
   deleteOneTravelPosts(id: string): Promise<DeleteResult> {
-    return this.travelPostRepo.delete(id);
-  }
-
-  // DELETE ONE TRAVEL POSTS BY ID  ------------------------------------------------------//
-  deleteTravelPostsById(id: string): Promise<DeleteResult> {
     return this.travelPostRepo.delete(id);
   }
 }

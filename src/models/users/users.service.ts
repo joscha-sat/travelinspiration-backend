@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
@@ -6,10 +12,15 @@ import { UserDto } from './dto/user.dto';
 import { comparePasswords, toUserDto } from '../../shared/mapper';
 import { LoginUserDto } from './dto/login-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { TravelpostService } from '../travelpost/travelpost.service';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private userRepo: Repository<User>) {}
+  constructor(
+    @Inject(forwardRef(() => TravelpostService))
+    private travelpostService: TravelpostService,
+    @InjectRepository(User) private userRepo: Repository<User>,
+  ) {}
 
   async create(userDto: CreateUserDto): Promise<UserDto> {
     const { username, password, email } = userDto;
@@ -65,5 +76,46 @@ export class UsersService {
     return await this.findOne({
       where: { username },
     });
+  }
+
+  async addTravelpostToFavouritesList(userId: string, postId: string) {
+    const travelpost = await this.travelpostService.getTravelPostById(postId);
+    const user = await this.userRepo.findOne({
+      relations: ['favouriteList'],
+      where: { id: userId },
+    });
+
+    if (!user.favouriteList) {
+      user.favouriteList = [];
+    }
+    if (!user.favouriteList.find((travelpost) => travelpost.id === postId)) {
+      user.favouriteList.push(travelpost);
+    }
+
+    return this.userRepo.save(user);
+  }
+
+  async getFavourites(id: string) {
+    const user = await this.userRepo.findOne({
+      relations: ['favouriteList'],
+      where: { id: id },
+    });
+
+    return user.favouriteList;
+  }
+
+  async deleteFavouriteById(userId: string, postId: string) {
+    const user = await this.userRepo.findOne({
+      relations: ['favouriteList'],
+      where: { id: userId },
+    });
+
+    const index = user.favouriteList.findIndex((object) => {
+      return object.id.toString() === postId;
+    });
+
+    user.favouriteList.splice(index, 1);
+
+    return await this.userRepo.save(user);
   }
 }

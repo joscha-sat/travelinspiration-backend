@@ -10,12 +10,6 @@ export class PhotoService {
     private photoRepo: Repository<Photo>,
   ) {}
 
-  getPosts() {
-    return this.photoRepo.find({
-      relations: ['travelpost'],
-    });
-  }
-
   getPhotosByPostId(id: string) {
     return this.photoRepo.find({
       relations: ['travelpost'],

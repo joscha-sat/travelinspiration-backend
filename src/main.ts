@@ -6,6 +6,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
 
+  // app.setGlobalPrefix();
+
   // SWAGGER
   const config = new DocumentBuilder()
     .setTitle('Travelinspiration')

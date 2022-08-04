@@ -1,5 +1,13 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  JoinTable,
+} from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Travelpost } from '../travelpost/travelpost.entity';
 
 @Entity()
 export class User {
@@ -22,6 +30,10 @@ export class User {
     unique: true,
   })
   email: string;
+
+  @ManyToMany(() => Travelpost, { cascade: true, onUpdate: 'CASCADE' })
+  @JoinTable()
+  favouriteList: Travelpost[];
 
   @BeforeInsert()
   async hashPassword() {
